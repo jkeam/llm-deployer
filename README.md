@@ -11,7 +11,7 @@ Deploy LLM on OpenShift
 
 ```shell
 # replace jkeam with your own name
-podman build -t quay.io/jkeam/llm-deployer
+podman build -t quay.io/jkeam/llm-deployer -f ./Dockerfile .
 podman push -t quay.io/jkeam/llm-deployer
 ```
 
