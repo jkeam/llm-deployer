@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: add-model-job-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: add-model-job
+spec:
+  backoffLimit: 4
+  template:
+    spec:
+      serviceAccount: llm-sa
+      serviceAccountName: llm-sa
+      initContainers:
+      containers:
+      - name: add-model
+        image: "quay.io/jkeam/llm-deployer:latest"
+        imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: model-bucket-secret
+        volumeMounts:
+        - name: models
+          mountPath: /opt/app-root/models
+        resources:
+          requests:
+            memory: "16Gi"
+            cpu: "500m"
+            ephemeral-storage: "16Gi"
+          limits:
+            memory: "24Gi"
+            cpu: "2000m"
+            ephemeral-storage: "24Gi"
+      securityContext:
+        fsGroup: 0
+      restartPolicy: Never
+      volumes:
+        - name: models
+          persistentVolumeClaim:
+            claimName: add-model-job-pvc
