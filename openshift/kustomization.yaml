@@ -28,3 +28,4 @@ resources:
 - serviceaccount.yaml
 - job.yaml
 - servingruntime.yaml
+- inferenceservice.yaml

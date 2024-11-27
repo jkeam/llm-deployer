@@ -1,0 +1,39 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  annotations:
+    openshift.io/display-name: granite
+    serving.knative.openshift.io/enablePassthrough: "true"
+    sidecar.istio.io/inject: "true"
+    sidecar.istio.io/rewriteAppHTTPProbers: "true"
+  finalizers:
+  - inferenceservice.finalizers
+  generation: 1
+  labels:
+    opendatahub.io/dashboard: "true"
+  name: granite
+spec:
+  predictor:
+    maxReplicas: 1
+    minReplicas: 1
+    model:
+      modelFormat:
+        name: vLLM
+      name: ""
+      resources:
+        limits:
+          cpu: "4"
+          memory: 24Gi
+          nvidia.com/gpu: "1"
+        requests:
+          cpu: "2"
+          memory: 16Gi
+          nvidia.com/gpu: "1"
+      runtime: granite
+      storage:
+        key: aws-connection-minio
+        path: granite
+    tolerations:
+    - effect: NoSchedule
+      key: nvidia.com/gpu
+      operator: Exists
