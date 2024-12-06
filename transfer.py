@@ -5,6 +5,7 @@ from subprocess import call
 directory:str = "/opt/app-root/models/granite-7b-lab"
 repo:str = "https://huggingface.co/instructlab/granite-7b-lab"
 model_bucket_name:str = getenv("AWS_S3_MODEL_BUCKET", "granite")
+region:str = getenv("AWS_DEFAULT_REGION", "us-east-2")
 makedirs(directory)
 
 # download model
@@ -19,7 +20,8 @@ s3 = client("s3",
 # create bucket if not exist
 bucket:str|None = getenv("AWS_S3_BUCKET", "models")
 if bucket not in [bu["Name"] for bu in s3.list_buckets()["Buckets"]]:
-    s3.create_bucket(Bucket=bucket)
+    location:dict[str, str] = {'LocationConstraint': region}
+    s3.create_bucket(Bucket=bucket, CreateBucketConfiguration=location)
     print(f"created {bucket} bucket")
 else:
     print(f"{bucket} bucket exists, using it")
