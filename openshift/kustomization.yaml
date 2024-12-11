@@ -25,7 +25,7 @@ patches:
 
 resources:
 - namespace.yaml
-- serviceaccount.yaml
+- service-account.yaml
 - job.yaml
 - servingruntime.yaml
 - inferenceservice.yaml
