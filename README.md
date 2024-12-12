@@ -18,6 +18,7 @@ podman push quay.io/jkeam/llm-deployer
 ## Deploy on OpenShift
 
 ```shell
-cp ./.env.example ./.env  # then update .env with real values
+cp ./.env.example ./openshift/.env
+# then update ./openshift/.env with real values
 oc apply -k ./openshift
 ```
