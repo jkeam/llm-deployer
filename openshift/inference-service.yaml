@@ -29,7 +29,7 @@ spec:
       runtime: granite
       storage:
         key: model-bucket-secret
-        path: granite
+        path: mistral
     tolerations:
     - effect: NoSchedule
       key: nvidia.com/gpu
