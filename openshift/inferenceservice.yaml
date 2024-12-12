@@ -16,10 +16,11 @@ spec:
     model:
       modelFormat:
         name: vLLM
+      name: ""
       resources:
         limits:
           cpu: "4"
-          memory: 24Gi
+          memory: 20Gi
           nvidia.com/gpu: "1"
         requests:
           cpu: "2"
