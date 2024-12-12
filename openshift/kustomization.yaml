@@ -31,5 +31,5 @@ resources:
 - service-account.yaml
 - job.yaml
 - accelerator-profile.yaml
-- servingruntime.yaml
-- inferenceservice.yaml
+- serving-runtime.yaml
+- inference-service.yaml
