@@ -28,7 +28,7 @@ spec:
           imagePullPolicy: Always
           env:
           - name: MODEL_URL
-            value: http://granite-predictor.llm.svc.cluster.local/v1
+            value: http://mistral-predictor.llm.svc.cluster.local/v1
           ports:
           - containerPort: 8080
             name: theport

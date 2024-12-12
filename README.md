@@ -30,12 +30,12 @@ oc apply -k ./openshift
 We can curl the endpoint and chat with it.
 
 ```shell
-BOT_URL="$(oc get ksvc/granite-predictor -o jsonpath='{.status.url}' -n llm)"
+BOT_URL="$(oc get ksvc/mistral-predictor -o jsonpath='{.status.url}' -n llm)"
 curl -k "$BOT_URL/v1/chat/completions" \
      -X POST \
      -H "Content-Type: application/json" \
      -d '{
-            "model": "granite",
+            "model": "mistral",
             "messages": [
               {"role": "system", "content": "You are a helpful bot.  Do not lie. Talk like a pirate."},
               {"role": "user", "content": "Hi nice to meet you!"}
@@ -49,7 +49,7 @@ We can deploy a very simple chatbot to interact with our model once it is deploy
 
 ```shell
 oc apply -f ./openshift/chatbot.yaml
-BOT_URL="$(oc get ksvc/granite-predictor -o jsonpath='{.status.url}' -n llm)"
+BOT_URL="$(oc get ksvc/mistral-predictor -o jsonpath='{.status.url}' -n llm)"
 oc set env deployment/chatbot MODEL_URL="$BOT_URL/v1" -n llm-chatbot
 echo "Open the following in a browser: https://$(oc get routes/chatbot -n llm-chatbot -o jsonpath='{.spec.host}')"
 ```

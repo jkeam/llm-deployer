@@ -7,10 +7,10 @@ metadata:
     opendatahub.io/recommended-accelerators: '["nvidia.com/gpu"]'
     opendatahub.io/template-display-name: vLLM ServingRuntime for KServe
     opendatahub.io/template-name: vllm-runtime
-    openshift.io/display-name: granite
+    openshift.io/display-name: mistral
   labels:
     opendatahub.io/dashboard: "true"
-  name: granite
+  name: mistral
 spec:
   annotations:
     prometheus.io/path: /metrics
