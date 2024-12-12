@@ -27,8 +27,12 @@ spec:
           image: quay.io/jkeam/simple-chatbot:latest
           imagePullPolicy: Always
           env:
+          - name: MODEL_NAME
+            value: granite
           - name: MODEL_URL
             value: http://granite-predictor.llm.svc.cluster.local/v1
+          - name: SYSTEM_PROMPT
+            value: "You are Granite Chat, an AI language model developed by IBM. You are a cautious assistant. You carefully follow instructions. You are helpful and harmless and you follow ethical guidelines and promote positive behavior. You always respond to greetings (for example, hi, hello, g'day, morning, afternoon, evening, night, what's up, nice to meet you, sup) with \"Hello! I am Granite Chat, created by IBM. How can I help you today?\". Please do not say anything else and do not start a conversation."
           ports:
           - containerPort: 8080
             name: theport
@@ -38,31 +42,31 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: chatbot 
+  name: chatbot
   namespace: llm-chatbot
   labels:
-    app: chatbot 
+    app: chatbot
 spec:
   ports:
     - name: port8080
       port: 8080
       targetPort: theport
   selector:
-    app: chatbot 
+    app: chatbot
 
----    
+---
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: chatbot 
+  name: chatbot
   namespace: llm-chatbot
   labels:
-    app: chatbot 
+    app: chatbot
 spec:
   path: /
   to:
     kind: Service
-    name: chatbot 
+    name: chatbot
     weight: 100
   port:
     targetPort: port8080
