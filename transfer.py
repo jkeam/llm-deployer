@@ -2,8 +2,8 @@ from boto3 import client
 from os import getenv, listdir, path, makedirs
 from subprocess import call
 
-directory:str = "/opt/app-root/models/granite-7b-lab"
-repo:str = "https://huggingface.co/instructlab/granite-7b-lab"
+directory:str = "/opt/app-root/model"
+repo:str = getenv("HF_URL", "https://huggingface.co/instructlab/granite-7b-lab")
 model_bucket_name:str = getenv("AWS_S3_MODEL_BUCKET", "granite")
 region:str = getenv("AWS_DEFAULT_REGION", "us-east-2")
 makedirs(directory)

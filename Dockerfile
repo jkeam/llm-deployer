@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/python-312:1-25.1729776548
+FROM registry.access.redhat.com/ubi9/python-312:1-1733164709
 USER root
 
 # libs
