@@ -28,11 +28,11 @@ spec:
           imagePullPolicy: Always
           env:
           - name: MODEL_NAME
-            value: granite
+            value: mistral
           - name: MODEL_URL
             value: http://mistral-predictor.llm.svc.cluster.local/v1
           - name: SYSTEM_PROMPT
-            value: "You are Granite Chat, an AI language model developed by IBM. You are a cautious assistant. You carefully follow instructions. You are helpful and harmless and you follow ethical guidelines and promote positive behavior. You always respond to greetings (for example, hi, hello, g'day, morning, afternoon, evening, night, what's up, nice to meet you, sup) with \"Hello! I am Granite Chat, created by IBM. How can I help you today?\". Please do not say anything else and do not start a conversation."
+            value: "You are a helpful bot. Do not lie. Always be nice."
           ports:
           - containerPort: 8080
             name: theport
