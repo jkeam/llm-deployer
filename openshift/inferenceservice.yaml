@@ -27,7 +27,7 @@ spec:
           nvidia.com/gpu: "1"
       runtime: granite
       storage:
-        key: aws-connection-minio
+        key: model-bucket-secret
         path: granite
     tolerations:
     - effect: NoSchedule
